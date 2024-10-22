@@ -2,14 +2,19 @@ package org.example;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 import static org.example.SalaryConstants.*;
 
 public class NetSalary implements Salary {
     BigDecimal grossSalary;
 
-    public NetSalary(BigDecimal grossSalary) {
-        this.grossSalary = grossSalary;
+    public NetSalary(double grossSalary) {
+        this.grossSalary = new BigDecimal(grossSalary);
+    }
+
+    public BigDecimal getGrossSalary() {
+        return roundOff(grossSalary);
     }
 
     @Override
@@ -54,7 +59,7 @@ public class NetSalary implements Salary {
             return new BigDecimal(MONTHLY_MAX_BASIC_EXEMPTION)
                     .subtract(new BigDecimal("0.72667")
                             .multiply(grossSalary
-                                    .subtract(new BigDecimal("1200"))));
+                                    .subtract(new BigDecimal(MONTHLY_LOWER_END_INCOME))));
         return new BigDecimal("0");
     }
 
@@ -78,5 +83,14 @@ public class NetSalary implements Salary {
         return result.setScale(2, RoundingMode.HALF_UP);
     }
 
-
+    @Override
+    public String toString() {
+        return "\nTöötaja palk\n" + "====================================================\n" +
+                String.format("%-35s %15s \n", "Brutopalk:", getGrossSalary()) +
+                String.format("%-35s %15s \n", "Kogumispension (II sammas):", getSavingsPension()) +
+                String.format("%-35s %15s \n", "Töötuskindlustusmakse (töötaja):", getUnemploymentInsurance()) +
+                String.format("%-35s %15s \n", "Tulumaks:", getIncomeTax()) +
+                String.format("%-35s %15s \n", "Netopalk:", getNetSalary()) +
+                "====================================================\n";
+    }
 }

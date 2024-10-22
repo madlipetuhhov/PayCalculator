@@ -7,6 +7,7 @@ import static org.example.SalaryConstants.*;
 
 public class PayCalculator {
 
+
     public BigDecimal calcSavingsPensionIIPillar(BigDecimal grossSalary) {
         return grossSalary.multiply(new BigDecimal(SAVINGS_PENSION_PERCENT));
     }
@@ -23,7 +24,7 @@ public class PayCalculator {
             return new BigDecimal(MONTHLY_MAX_BASIC_EXEMPTION)
                     .subtract(new BigDecimal("0.72667")
                             .multiply(grossSalary
-                                    .subtract(new BigDecimal("1200"))));
+                                    .subtract(new BigDecimal(MONTHLY_LOWER_END_INCOME))));
         return new BigDecimal("0");
     }
 
