@@ -9,7 +9,6 @@ public class SalaryConstants {
     public static final double SAVINGS_PENSION_PERCENT = 0.02;
     public static final double UNEMPLOYMENT_INSURANCE_PERCENT = 0.016;
 
-
     private SalaryConstants() {
     }
 }

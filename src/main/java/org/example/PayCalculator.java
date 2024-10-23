@@ -19,7 +19,8 @@ public class PayCalculator {
     public BigDecimal calcBasicExemption(BigDecimal grossSalary) {
         BigDecimal annualGrossSalary = grossSalary.multiply(new BigDecimal("12"));
         if (grossSalary.doubleValue() <= MONTHLY_MAX_BASIC_EXEMPTION) return grossSalary;
-        if (annualGrossSalary.doubleValue() <= ANNUAL_LOWER_END_INCOME) return new BigDecimal(MONTHLY_MAX_BASIC_EXEMPTION);
+        if (annualGrossSalary.doubleValue() <= ANNUAL_LOWER_END_INCOME)
+            return new BigDecimal(MONTHLY_MAX_BASIC_EXEMPTION);
         if (annualGrossSalary.doubleValue() > ANNUAL_LOWER_END_INCOME && annualGrossSalary.doubleValue() < ANNUAL_MAX_START_INCOME)
             return new BigDecimal(MONTHLY_MAX_BASIC_EXEMPTION)
                     .subtract(new BigDecimal("0.72667")
