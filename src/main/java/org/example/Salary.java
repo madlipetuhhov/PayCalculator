@@ -21,8 +21,6 @@ public abstract class Salary {
 
     public abstract BigDecimal getNetSalary();
 
-    public abstract String toString();
-
     // From Gross to Net
     protected BigDecimal calcSavingsPensionIIPillar(BigDecimal grossSalary) {
         return grossSalary.multiply(new BigDecimal(SAVINGS_PENSION_PERCENT));
