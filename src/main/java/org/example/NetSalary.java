@@ -4,54 +4,15 @@ import java.math.BigDecimal;
 
 public class NetSalary extends Salary {
 
-    public NetSalary(double netSalary) {
+    //    todo: BigDecimalina tuleb hetkel sisse, aga voiks tulla double
+    public NetSalary(BigDecimal netSalary) {
         super(netSalary);
     }
 
+//    todo: siit on vaja edasi minna, kuidas saada netist grossi
     @Override
-    public BigDecimal getGrossSalary() {
-        return roundOff(netSalary.add(getIncomeTax())
-                .add(getUnemploymentInsuranceEmployee())
-                .add(getSavingsPension()));
-    }
-
-    @Override
-    public BigDecimal getSavingsPension() {
+    protected BigDecimal getGrossSalary(BigDecimal salary) {
         return null;
     }
 
-    @Override
-    public BigDecimal getUnemploymentInsuranceEmployee() {
-        return null;
-    }
-
-    @Override
-    public BigDecimal getBasicExemption() {
-        return null;
-    }
-
-    @Override
-    public BigDecimal getIncomeTax() {
-        return null;
-    }
-
-    @Override
-    public BigDecimal getNetSalary() {
-        return null;
-    }
-
-    @Override
-    public BigDecimal getUnemploymentInsuranceEmployer() {
-        return null;
-    }
-
-    @Override
-    public BigDecimal getSocialTax() {
-        return null;
-    }
-
-    @Override
-    public BigDecimal getPayrollFund() {
-        return null;
-    }
 }

@@ -3,8 +3,10 @@ package org.example;
 import java.math.BigDecimal;
 
 public class SalaryConstants {
-    public static final int ANNUAL_MAX_START_INCOME = 25_200;
-    public static final int ANNUAL_LOWER_END_INCOME = 14_400;
+    public static final int ANNUAL_MAX_START_INCOME_GROSS = 25_200;
+    public static final double ANNUAL_MAX_START_INCOME_NET = 19_434.24;
+    public static final int ANNUAL_LOWER_END_INCOME_GROSS = 14_400;
+    public static final double ANNUAL_LOWER_END_INCOME_NET = 12_674.88;
     public static final BigDecimal MONTHLY_LOWER_END_INCOME = new BigDecimal("1200");
     public static final BigDecimal INCOME_TAX_PERCENT = new BigDecimal("0.2");
     public static final BigDecimal MONTHLY_MAX_BASIC_EXEMPTION = new BigDecimal("654");
