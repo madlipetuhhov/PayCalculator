@@ -21,7 +21,8 @@ public class NetSalary extends Salary {
         }
         BigDecimal taxableIncome = incomeTax.multiply(new BigDecimal("5"));
         BigDecimal amountBeforeIncomeTax = getBasicExemption(netSalary).add(taxableIncome);
-        return amountBeforeIncomeTax.multiply(new BigDecimal("1.037344"));
+        BigDecimal grossSalary = amountBeforeIncomeTax.multiply(new BigDecimal("1.037344"));
+        return grossSalary;
     }
 
     protected BigDecimal getBasicExemption(BigDecimal netSalary) {

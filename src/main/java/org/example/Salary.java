@@ -88,7 +88,7 @@ public abstract class Salary {
                 String.format("%-35s %15s \n", "Tööandja kulu kokku (palgafond):", roundOff(getPayrollFund())) +
                 String.format("%-35s %15s \n", "Sotsiaalmaks:", roundOff(getSocialTax())) +
                 String.format("%-35s %15s \n", "Töötuskindlustusmakse (tööandja):", roundOff(getUnemploymentInsuranceEmployer())) +
-                String.format("%-35s %15s \n", "Brutopalk:", roundOff(getGrossSalary(grossSalary))) +
+                String.format("%-35s %15s \n", "Brutopalk:", roundOff(grossSalary)) +
                 String.format("%-35s %15s \n", "Kogumispension (II sammas):", roundOff(getSavingsPension())) +
                 String.format("%-35s %15s \n", "Töötuskindlustusmakse (töötaja):", roundOff(getUnemploymentInsuranceEmployee())) +
                 String.format("%-35s %15s \n", "Tulumaks:", roundOff(getIncomeTax())) +
