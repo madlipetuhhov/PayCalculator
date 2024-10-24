@@ -12,7 +12,7 @@ public class GrossSalary extends Salary {
 
     @Override
     protected BigDecimal getGrossSalary(BigDecimal salary) {
-        return grossSalary;
+        return salary;
     }
 
 
