@@ -13,6 +13,7 @@ public class SalaryConstants {
     public static final BigDecimal UNEMPLOYMENT_INSURANCE_EMPLOYEE = new BigDecimal("0.016");
     public static final BigDecimal UNEMPLOYMENT_INSURANCE_EMPLOYER = new BigDecimal("0.008");
     public static final BigDecimal SOCIAL_TAX = new BigDecimal("0.33");
+    public static final BigDecimal PAYROLL_FUND_PERCENT = new BigDecimal("1.338");
 
     private SalaryConstants() {
     }
