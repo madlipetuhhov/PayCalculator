@@ -48,11 +48,10 @@ public abstract class Salary {
     }
 
     public BigDecimal getBasicExemption() {
-        BigDecimal annualGrossSalary = grossSalary.multiply(FULL_YEAR);
         if (grossSalary.doubleValue() <= MONTHLY_MAX_BASIC_EXEMPTION.doubleValue()) return grossSalary;
-        if (annualGrossSalary.doubleValue() <= ANNUAL_LOWER_END_INCOME_GROSS)
+        if (grossSalary.doubleValue() <= LOWER_END_INCOME_GROSS)
             return MONTHLY_MAX_BASIC_EXEMPTION;
-        if (annualGrossSalary.doubleValue() > ANNUAL_LOWER_END_INCOME_GROSS && annualGrossSalary.doubleValue() < ANNUAL_MAX_START_INCOME_GROSS)
+        if (grossSalary.doubleValue() > LOWER_END_INCOME_GROSS && grossSalary.doubleValue() < MAX_START_INCOME_GROSS)
             return MONTHLY_MAX_BASIC_EXEMPTION
                     .subtract(new BigDecimal("0.72667")
                             .multiply(grossSalary
