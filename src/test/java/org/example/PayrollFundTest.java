@@ -8,7 +8,7 @@ import java.math.RoundingMode;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PayrollFundTest {
-    PayrollFund payrollFund = new PayrollFund(new BigDecimal("4000"));
+    PayrollFund payrollFund = new PayrollFund(4000);
 
     @Test
     void getGrossSalary() {

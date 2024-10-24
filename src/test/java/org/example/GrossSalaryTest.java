@@ -8,7 +8,7 @@ import java.math.RoundingMode;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GrossSalaryTest {
-    GrossSalary salary = new GrossSalary(new BigDecimal("1000"));
+    GrossSalary salary = new GrossSalary(1000);
 
     @Test
     void getGrossSalary() {
@@ -19,11 +19,11 @@ class GrossSalaryTest {
 
     @Test
     void getBasicExemption() {
-        assertEquals(new BigDecimal("300"), new GrossSalary(new BigDecimal("300")).getBasicExemption());
+        assertEquals(new BigDecimal("300"), new GrossSalary(300).getBasicExemption());
         assertEquals(new BigDecimal("654"), salary.getBasicExemption());
-        assertEquals(new BigDecimal("653.27"), new GrossSalary(new BigDecimal("1201")).getBasicExemption().setScale(2, RoundingMode.HALF_UP));
-        assertEquals(BigDecimal.ZERO, new GrossSalary(new BigDecimal("2100")).getBasicExemption());
-        assertEquals(BigDecimal.ZERO, new GrossSalary(new BigDecimal("2500")).getBasicExemption());
+        assertEquals(new BigDecimal("653.27"), new GrossSalary(1201).getBasicExemption().setScale(2, RoundingMode.HALF_UP));
+        assertEquals(BigDecimal.ZERO, new GrossSalary(2100).getBasicExemption());
+        assertEquals(BigDecimal.ZERO, new GrossSalary(2500).getBasicExemption());
     }
 
     @Test

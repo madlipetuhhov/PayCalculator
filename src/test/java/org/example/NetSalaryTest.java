@@ -8,7 +8,7 @@ import java.math.RoundingMode;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class NetSalaryTest {
-    NetSalary salary = new NetSalary(new BigDecimal("300"));
+    NetSalary salary = new NetSalary(300);
 
     @Test
     void getGrossSalary() {

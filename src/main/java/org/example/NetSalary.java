@@ -8,8 +8,8 @@ import static org.example.SalaryConstants.*;
 public class NetSalary extends Salary {
 
     //    todo: BigDecimalina tuleb hetkel sisse, aga voiks tulla double
-    public NetSalary(BigDecimal netSalary) {
-        super(netSalary);
+    public NetSalary(double netSalary) {
+        super(new BigDecimal(netSalary));
     }
 
     @Override
