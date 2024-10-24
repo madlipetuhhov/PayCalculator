@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import static org.example.SalaryConstants.*;
-import static org.example.SalaryConstants.MONTHLY_LOWER_END_INCOME;
 
 public abstract class Salary {
     BigDecimal grossSalary;
@@ -18,7 +17,6 @@ public abstract class Salary {
     BigDecimal socialTax;
 
     public Salary(BigDecimal salary) {
-//        System.out.println("Sal Type: "+salaryType);
         this.grossSalary = getGrossSalary(salary);
         this.netSalary = getNetSalary();
         this.payrollFund = getPayrollFund();
@@ -39,43 +37,43 @@ public abstract class Salary {
                 .subtract(getIncomeTax());
     }
 
-    public BigDecimal getSavingsPension() {
-        return grossSalary.multiply(SAVINGS_PENSION_PERCENT);
+    protected BigDecimal getSavingsPension() {
+        return grossSalary.multiply(SAVINGS_PENSION);
     }
 
-    public BigDecimal getUnemploymentInsuranceEmployee() {
-        return grossSalary.multiply(UNEMPLOYMENT_INSURANCE_PERCENT_EMPLOYEE);
+    protected BigDecimal getUnemploymentInsuranceEmployee() {
+        return grossSalary.multiply(UNEMPLOYMENT_INSURANCE_EMPLOYEE);
     }
 
-    public BigDecimal getBasicExemption() {
-        if (grossSalary.doubleValue() <= MONTHLY_MAX_BASIC_EXEMPTION.doubleValue()) return grossSalary;
-        if (grossSalary.doubleValue() <= LOWER_END_INCOME_GROSS)
-            return MONTHLY_MAX_BASIC_EXEMPTION;
-        if (grossSalary.doubleValue() > LOWER_END_INCOME_GROSS && grossSalary.doubleValue() < MAX_START_INCOME_GROSS)
-            return MONTHLY_MAX_BASIC_EXEMPTION
+    protected BigDecimal getBasicExemption() {
+        if (grossSalary.doubleValue() <= MAX_BASIC_EXEMPTION.doubleValue()) return grossSalary;
+        if (grossSalary.doubleValue() <= LOWER_END_GROSS_SALARY.doubleValue())
+            return MAX_BASIC_EXEMPTION;
+        if (grossSalary.doubleValue() > LOWER_END_GROSS_SALARY.doubleValue() && grossSalary.doubleValue() < MAX_START_GROSS_SALARY.doubleValue())
+            return MAX_BASIC_EXEMPTION
                     .subtract(new BigDecimal("0.72667")
                             .multiply(grossSalary
-                                    .subtract(MONTHLY_LOWER_END_INCOME)));
+                                    .subtract(LOWER_END_GROSS_SALARY)));
         return BigDecimal.ZERO;
     }
 
-    public BigDecimal getIncomeTax() {
+    protected BigDecimal getIncomeTax() {
         return grossSalary
                 .subtract(getSavingsPension())
                 .subtract(getUnemploymentInsuranceEmployee())
                 .subtract(getBasicExemption())
-                .multiply(INCOME_TAX_PERCENT);
+                .multiply(INCOME_TAX);
     }
 
-    public BigDecimal getUnemploymentInsuranceEmployer() {
-        return grossSalary.multiply(UNEMPLOYMENT_INSURANCE_PERCENT_EMPLOYER);
+    protected BigDecimal getUnemploymentInsuranceEmployer() {
+        return grossSalary.multiply(UNEMPLOYMENT_INSURANCE_EMPLOYER);
     }
 
-    public BigDecimal getSocialTax() {
-        return grossSalary.multiply(SOCIAL_TAX_PERCENT);
+    protected BigDecimal getSocialTax() {
+        return grossSalary.multiply(SOCIAL_TAX);
     }
 
-    public BigDecimal getPayrollFund() {
+    protected BigDecimal getPayrollFund() {
         return grossSalary
                 .add(getSocialTax())
                 .add(getUnemploymentInsuranceEmployer());
