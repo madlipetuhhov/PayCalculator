@@ -16,7 +16,7 @@ public class NetSalary extends Salary {
     protected BigDecimal getGrossSalary(BigDecimal netSalary) {
         BigDecimal incomeTax = BigDecimal.ZERO;
         if (netSalary.doubleValue() > MAX_BASIC_EXEMPTION.doubleValue()) {
-            incomeTax = (netSalary.subtract(getBasicExemption(netSalary))).divide(new BigDecimal("4"));
+            incomeTax = (netSalary.subtract(getBasicExemption(netSalary))).divide(new BigDecimal("4"), 4, RoundingMode.HALF_UP);
 
         }
         BigDecimal taxableIncome = incomeTax.multiply(new BigDecimal("5"));
@@ -26,13 +26,14 @@ public class NetSalary extends Salary {
     }
 
     protected BigDecimal getBasicExemption(BigDecimal netSalary) {
+//        todo: muuta compareTo
         if (netSalary.doubleValue() <= MAX_BASIC_EXEMPTION.doubleValue()) return netSalary;
         if (netSalary.doubleValue() <= LOWER_END_NET_SALARY.doubleValue()) return MAX_BASIC_EXEMPTION;
         if (netSalary.doubleValue() > LOWER_END_NET_SALARY.doubleValue() && netSalary.doubleValue() < MAX_START_NET_SALARY.doubleValue())
             return MAX_START_NET_SALARY
                     .subtract(netSalary)
                     .multiply(MAX_BASIC_EXEMPTION)
-                    .divide(MAX_START_NET_SALARY.subtract(LOWER_END_NET_SALARY), 10, RoundingMode.HALF_UP);
+                    .divide(MAX_START_NET_SALARY.subtract(LOWER_END_NET_SALARY), 4, RoundingMode.HALF_UP);
         return BigDecimal.ZERO;
     }
 }

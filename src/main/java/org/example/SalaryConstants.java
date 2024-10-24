@@ -15,6 +15,5 @@ public class SalaryConstants {
     public static final BigDecimal SOCIAL_TAX = new BigDecimal("0.33");
     public static final BigDecimal PAYROLL_FUND_PERCENT = new BigDecimal("1.338");
 
-    private SalaryConstants() {
-    }
+    private SalaryConstants() {}
 }

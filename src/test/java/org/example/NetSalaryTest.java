@@ -12,9 +12,9 @@ class NetSalaryTest {
 
     @Test
     void getGrossSalary() {
-        assertEquals(new BigDecimal("311.20"), salary.getGrossSalary(new BigDecimal("300"))
+        assertEquals(new BigDecimal("300.00"), salary.getGrossSalary(new BigDecimal("289.20"))
                 .setScale(2, RoundingMode.HALF_UP));
-        assertEquals(new BigDecimal("902.00"), salary.getGrossSalary(new BigDecimal("826.42"))
+        assertEquals(new BigDecimal("1000.00"), salary.getGrossSalary(new BigDecimal("902"))
                 .setScale(2, RoundingMode.HALF_UP));
         assertEquals(new BigDecimal("1200.99"), salary.getGrossSalary(new BigDecimal("1056.86"))
                 .setScale(2, RoundingMode.HALF_UP));

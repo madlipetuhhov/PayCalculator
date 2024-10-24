@@ -46,7 +46,9 @@ public abstract class Salary {
     }
 
     protected BigDecimal getBasicExemption() {
+//        todo: muuta compareTo
         if (grossSalary.doubleValue() <= MAX_BASIC_EXEMPTION.doubleValue()) return grossSalary;
+//        if (grossSalary.compareTo(MAX_BASIC_EXEMPTION) <= 0) return grossSalary;
         if (grossSalary.doubleValue() <= LOWER_END_GROSS_SALARY.doubleValue())
             return MAX_BASIC_EXEMPTION;
         if (grossSalary.doubleValue() > LOWER_END_GROSS_SALARY.doubleValue() && grossSalary.doubleValue() < MAX_START_GROSS_SALARY.doubleValue())
@@ -84,7 +86,7 @@ public abstract class Salary {
     }
 
     public String toString() {
-        return "\nTöötaja palk\n" + "====================================================\n" +
+        return "\n====================================================\n" +
                 String.format("%-35s %15s \n", "Tööandja kulu kokku (palgafond):", roundOff(getPayrollFund())) +
                 String.format("%-35s %15s \n", "Sotsiaalmaks:", roundOff(getSocialTax())) +
                 String.format("%-35s %15s \n", "Töötuskindlustusmakse (tööandja):", roundOff(getUnemploymentInsuranceEmployer())) +

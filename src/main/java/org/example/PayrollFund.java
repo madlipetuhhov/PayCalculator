@@ -13,6 +13,6 @@ public class PayrollFund extends Salary {
 
     @Override
     protected BigDecimal getGrossSalary(BigDecimal salary) {
-        return salary.divide(PAYROLL_FUND_PERCENT, 10, RoundingMode.HALF_UP);
+        return salary.divide(PAYROLL_FUND_PERCENT, 4, RoundingMode.HALF_UP);
     }
 }
