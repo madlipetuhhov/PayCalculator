@@ -46,12 +46,10 @@ public abstract class Salary {
     }
 
     protected BigDecimal getBasicExemption() {
-//        todo: muuta compareTo
-        if (grossSalary.doubleValue() <= MAX_BASIC_EXEMPTION.doubleValue()) return grossSalary;
-//        if (grossSalary.compareTo(MAX_BASIC_EXEMPTION) <= 0) return grossSalary;
-        if (grossSalary.doubleValue() <= LOWER_END_GROSS_SALARY.doubleValue())
+        if (grossSalary.compareTo(MAX_BASIC_EXEMPTION) <= 0) return grossSalary;
+        if (grossSalary.compareTo(LOWER_END_GROSS_SALARY) <= 0)
             return MAX_BASIC_EXEMPTION;
-        if (grossSalary.doubleValue() > LOWER_END_GROSS_SALARY.doubleValue() && grossSalary.doubleValue() < MAX_START_GROSS_SALARY.doubleValue())
+        if (grossSalary.compareTo(LOWER_END_GROSS_SALARY) > 0 && grossSalary.compareTo(MAX_START_GROSS_SALARY) < 0)
             return MAX_BASIC_EXEMPTION
                     .subtract(new BigDecimal("0.72667")
                             .multiply(grossSalary
