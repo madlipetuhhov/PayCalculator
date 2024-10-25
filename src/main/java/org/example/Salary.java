@@ -16,21 +16,25 @@ public abstract class Salary {
     BigDecimal incomeTax;
     BigDecimal socialTax;
     boolean savingsPensionOption;
+    BigDecimal basicExemptionOption;
 
-    public Salary(BigDecimal salary, boolean savingsPension) {
-        this.savingsPensionOption = savingsPension;
+    public Salary(BigDecimal salary, boolean savingsPensionOption, BigDecimal basicExemptionOption) {
         this.grossSalary = getGrossSalary(salary);
+        this.savingsPensionOption = savingsPensionOption;
+//        this.basicExemptionOption = basicExemptionOption;
+//                                                                                                                              30 581 = -1 true
+        this.basicExemption = this.basicExemptionOption = (basicExemptionOption.doubleValue() <= -1) ? getBasicExemption() : (basicExemptionOption.compareTo(getBasicExemption()) > 0) ? getBasicExemption() : basicExemptionOption;
+        System.out.println((basicExemptionOption.doubleValue() <= -1) ? getBasicExemption() : (basicExemptionOption.compareTo(getBasicExemption()) > 0) ? getBasicExemption() : basicExemptionOption);
         this.netSalary = getNetSalary();
         this.payrollFund = getPayrollFund();
         this.savingsPension = this.savingsPensionOption ? getSavingsPension() : BigDecimal.ZERO;
         this.employeeUnemploymentInsurance = getUnemploymentInsuranceEmployee();
         this.employerUnemploymentInsurance = getUnemploymentInsuranceEmployer();
-        this.basicExemption = getBasicExemption();
+
+//        this.basicExemption = getBasicExemption();
         this.incomeTax = getIncomeTax();
         this.socialTax = getSocialTax();
     }
-
-//    todo: booleanid - II sammas on vabatahtlik; tulumaksuvaba miinimum, sh kindla summa maaramine
 
     protected abstract BigDecimal getGrossSalary(BigDecimal salary);
 
@@ -96,7 +100,8 @@ public abstract class Salary {
                 String.format("%-35s %15s \n", "Kogumispension (II sammas):", roundOff(getSavingsPension())) +
                 String.format("%-35s %15s \n", "Töötuskindlustusmakse (töötaja):", roundOff(getUnemploymentInsuranceEmployee())) +
                 String.format("%-35s %15s \n", "Tulumaks:", roundOff(getIncomeTax())) +
-                String.format("%-35s %15s \n", "Maksimaalne maksuvaba tulu:", roundOff(getBasicExemption())) +
+//                String.format("%-35s %15s \n", "Maksimaalne maksuvaba tulu:", roundOff(getBasicExemption())) +
+                String.format("%-35s %15s \n", "Maksimaalne maksuvaba tulu:", roundOff(this.basicExemptionOption)) +
                 String.format("%-35s %15s \n", "Netopalk:", roundOff(getNetSalary())) +
                 "====================================================\n";
     }

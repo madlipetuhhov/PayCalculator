@@ -7,8 +7,8 @@ import static org.example.SalaryConstants.*;
 
 public class NetSalary extends Salary {
 
-    public NetSalary(double netSalary, boolean savingsPension) {
-        super(new BigDecimal(netSalary), savingsPension);
+    public NetSalary(double netSalary, boolean savingsPension, double basicExemption) {
+        super(new BigDecimal(netSalary), savingsPension, new BigDecimal(basicExemption) );
     }
 
     @Override
