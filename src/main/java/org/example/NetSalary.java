@@ -7,7 +7,6 @@ import static org.example.SalaryConstants.*;
 
 public class NetSalary extends Salary {
 
-    //    todo: BigDecimalina tuleb hetkel sisse, aga voiks tulla double
     public NetSalary(double netSalary) {
         super(new BigDecimal(netSalary));
     }
@@ -15,7 +14,7 @@ public class NetSalary extends Salary {
     @Override
     protected BigDecimal getGrossSalary(BigDecimal netSalary) {
         BigDecimal incomeTax = BigDecimal.ZERO;
-        if (netSalary.doubleValue() > MAX_BASIC_EXEMPTION.doubleValue()) {
+        if (netSalary.compareTo(MAX_BASIC_EXEMPTION) > 0) {
             incomeTax = (netSalary.subtract(getBasicExemption(netSalary))).divide(new BigDecimal("4"), 4, RoundingMode.HALF_UP);
 
         }

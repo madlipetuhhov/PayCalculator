@@ -45,6 +45,8 @@ public abstract class Salary {
         return grossSalary.multiply(UNEMPLOYMENT_INSURANCE_EMPLOYEE);
     }
 
+//    todo: maksuvaba tulu arvutamine fix summaga voi uldse ei arvesta maksuvaba tulu
+
     protected BigDecimal getBasicExemption() {
         if (grossSalary.compareTo(MAX_BASIC_EXEMPTION) <= 0) return grossSalary;
         if (grossSalary.compareTo(LOWER_END_GROSS_SALARY) <= 0)
