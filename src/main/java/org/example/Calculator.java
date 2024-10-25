@@ -1,10 +1,7 @@
 package org.example;
 
-import java.math.BigDecimal;
-
 public class Calculator {
     public static void main(String[] args) {
-//        todo: selle asemel kutsud valja Salary klassi ja SalaryType.GROSS abil maarad milline
         Salary payrollFund = new PayrollFund(4000);
         System.out.println(payrollFund);
 
