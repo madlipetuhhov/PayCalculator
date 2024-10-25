@@ -15,18 +15,22 @@ public abstract class Salary {
     BigDecimal basicExemption;
     BigDecimal incomeTax;
     BigDecimal socialTax;
+    boolean savingsPensionOption;
 
-    public Salary(BigDecimal salary) {
+    public Salary(BigDecimal salary, boolean savingsPension) {
+        this.savingsPensionOption = savingsPension;
         this.grossSalary = getGrossSalary(salary);
         this.netSalary = getNetSalary();
         this.payrollFund = getPayrollFund();
-        this.savingsPension = getSavingsPension();
+        this.savingsPension = this.savingsPensionOption ? getSavingsPension() : BigDecimal.ZERO;
         this.employeeUnemploymentInsurance = getUnemploymentInsuranceEmployee();
         this.employerUnemploymentInsurance = getUnemploymentInsuranceEmployer();
         this.basicExemption = getBasicExemption();
         this.incomeTax = getIncomeTax();
         this.socialTax = getSocialTax();
     }
+
+//    todo: booleanid - II sammas on vabatahtlik; tulumaksuvaba miinimum, sh kindla summa maaramine
 
     protected abstract BigDecimal getGrossSalary(BigDecimal salary);
 
@@ -38,7 +42,7 @@ public abstract class Salary {
     }
 
     protected BigDecimal getSavingsPension() {
-        return grossSalary.multiply(SAVINGS_PENSION);
+        return this.savingsPensionOption ? grossSalary.multiply(SAVINGS_PENSION) : BigDecimal.ZERO;
     }
 
     protected BigDecimal getUnemploymentInsuranceEmployee() {
