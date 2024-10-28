@@ -15,23 +15,27 @@ public abstract class Salary {
     BigDecimal basicExemption;
     BigDecimal incomeTax;
     BigDecimal socialTax;
-    boolean savingsPensionOption;
     BigDecimal basicExemptionOption;
+    boolean savingsPensionOption;
+    boolean employeeUnemploymentInsuranceOption;
+    boolean employerUnemploymentInsuranceOption;
 
-    public Salary(BigDecimal salary, boolean savingsPensionOption, BigDecimal basicExemptionOption) {
-        this.grossSalary = getGrossSalary(salary);
+    public Salary(BigDecimal salary,
+                  boolean savingsPensionOption,
+                  BigDecimal basicExemptionOption,
+                  boolean employeeUnemploymentInsuranceOption,
+                  boolean employerUnemploymentInsuranceOption
+    ) {
         this.savingsPensionOption = savingsPensionOption;
-//        this.basicExemptionOption = basicExemptionOption;
-//                                                                                                                              30 581 = -1 true
+        this.employeeUnemploymentInsuranceOption = employeeUnemploymentInsuranceOption;
+        this.employerUnemploymentInsuranceOption = employerUnemploymentInsuranceOption;
+        this.grossSalary = getGrossSalary(salary);
         this.basicExemption = this.basicExemptionOption = (basicExemptionOption.doubleValue() <= -1) ? getBasicExemption() : (basicExemptionOption.compareTo(getBasicExemption()) > 0) ? getBasicExemption() : basicExemptionOption;
-        System.out.println((basicExemptionOption.doubleValue() <= -1) ? getBasicExemption() : (basicExemptionOption.compareTo(getBasicExemption()) > 0) ? getBasicExemption() : basicExemptionOption);
         this.netSalary = getNetSalary();
         this.payrollFund = getPayrollFund();
-        this.savingsPension = this.savingsPensionOption ? getSavingsPension() : BigDecimal.ZERO;
+        this.savingsPension = getSavingsPension();
         this.employeeUnemploymentInsurance = getUnemploymentInsuranceEmployee();
         this.employerUnemploymentInsurance = getUnemploymentInsuranceEmployer();
-
-//        this.basicExemption = getBasicExemption();
         this.incomeTax = getIncomeTax();
         this.socialTax = getSocialTax();
     }
@@ -50,7 +54,7 @@ public abstract class Salary {
     }
 
     protected BigDecimal getUnemploymentInsuranceEmployee() {
-        return grossSalary.multiply(UNEMPLOYMENT_INSURANCE_EMPLOYEE);
+        return this.employeeUnemploymentInsuranceOption ? grossSalary.multiply(UNEMPLOYMENT_INSURANCE_EMPLOYEE) : BigDecimal.ZERO;
     }
 
     protected BigDecimal getBasicExemption() {
@@ -69,12 +73,12 @@ public abstract class Salary {
         return grossSalary
                 .subtract(getSavingsPension())
                 .subtract(getUnemploymentInsuranceEmployee())
-                .subtract(getBasicExemption())
+                .subtract(this.basicExemption)
                 .multiply(INCOME_TAX);
     }
 
     protected BigDecimal getUnemploymentInsuranceEmployer() {
-        return grossSalary.multiply(UNEMPLOYMENT_INSURANCE_EMPLOYER);
+        return this.employerUnemploymentInsuranceOption ? grossSalary.multiply(UNEMPLOYMENT_INSURANCE_EMPLOYER) : BigDecimal.ZERO;
     }
 
     protected BigDecimal getSocialTax() {
@@ -100,7 +104,6 @@ public abstract class Salary {
                 String.format("%-35s %15s \n", "Kogumispension (II sammas):", roundOff(getSavingsPension())) +
                 String.format("%-35s %15s \n", "Töötuskindlustusmakse (töötaja):", roundOff(getUnemploymentInsuranceEmployee())) +
                 String.format("%-35s %15s \n", "Tulumaks:", roundOff(getIncomeTax())) +
-//                String.format("%-35s %15s \n", "Maksimaalne maksuvaba tulu:", roundOff(getBasicExemption())) +
                 String.format("%-35s %15s \n", "Maksimaalne maksuvaba tulu:", roundOff(this.basicExemptionOption)) +
                 String.format("%-35s %15s \n", "Netopalk:", roundOff(getNetSalary())) +
                 "====================================================\n";

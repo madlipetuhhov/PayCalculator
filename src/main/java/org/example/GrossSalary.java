@@ -3,8 +3,13 @@ package org.example;
 import java.math.BigDecimal;
 
 public class GrossSalary extends Salary {
-    public GrossSalary(double grossSalary, boolean savingsPension, double basicExemption) {
-        super(new BigDecimal(grossSalary), savingsPension, new BigDecimal(basicExemption) );
+    public GrossSalary(double grossSalary,
+                       boolean savingsPension,
+                       double basicExemption,
+                       boolean employeeUnemploymentInsuranceOption,
+                       boolean employerUnemploymentInsuranceOption
+    ) {
+        super(new BigDecimal(grossSalary), savingsPension, new BigDecimal(basicExemption), employeeUnemploymentInsuranceOption, employerUnemploymentInsuranceOption);
     }
 
     @Override

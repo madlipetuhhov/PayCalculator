@@ -7,13 +7,19 @@ import static org.example.SalaryConstants.*;
 
 public class NetSalary extends Salary {
 
-    public NetSalary(double netSalary, boolean savingsPension, double basicExemption) {
-        super(new BigDecimal(netSalary), savingsPension, new BigDecimal(basicExemption) );
+    public NetSalary(double netSalary,
+                     boolean savingsPension,
+                     double basicExemption,
+                     boolean employeeUnemploymentInsuranceOption,
+                     boolean employerUnemploymentInsuranceOption
+    ) {
+        super(new BigDecimal(netSalary), savingsPension, new BigDecimal(basicExemption), employeeUnemploymentInsuranceOption, employerUnemploymentInsuranceOption);
     }
 
     @Override
     protected BigDecimal getGrossSalary(BigDecimal netSalary) {
         BigDecimal incomeTax = BigDecimal.ZERO;
+        if (!savingsPensionOption) getSavingsPension();
         if (netSalary.compareTo(MAX_BASIC_EXEMPTION) > 0) {
             incomeTax = (netSalary.subtract(getBasicExemption(netSalary))).divide(new BigDecimal("4"), 4, RoundingMode.HALF_UP);
 
@@ -21,6 +27,10 @@ public class NetSalary extends Salary {
         BigDecimal taxableIncome = incomeTax.multiply(new BigDecimal("5"));
         BigDecimal amountBeforeIncomeTax = getBasicExemption(netSalary).add(taxableIncome);
         BigDecimal grossSalary = amountBeforeIncomeTax.multiply(new BigDecimal("1.037344"));
+//        if (!savingsPensionOption) {
+//            BigDecimal a = grossSalary.multiply(SAVINGS_PENSION);
+//            grossSalary = grossSalary.subtract(a);
+//        }
         return grossSalary;
     }
 

@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GrossSalaryTest {
-    GrossSalary salary = new GrossSalary(1000);
+    GrossSalary salary = new GrossSalary(1000, true, -1, true, true);
 
     @Test
     void getGrossSalary() {
@@ -19,16 +19,37 @@ class GrossSalaryTest {
 
     @Test
     void getBasicExemption() {
-        assertEquals(new BigDecimal("300"), new GrossSalary(300).getBasicExemption());
+        assertEquals(new BigDecimal("300"), new GrossSalary(300, true, -1, true, true).getBasicExemption());
         assertEquals(new BigDecimal("654"), salary.getBasicExemption());
-        assertEquals(new BigDecimal("653.27"), new GrossSalary(1201).getBasicExemption().setScale(2, RoundingMode.HALF_UP));
-        assertEquals(BigDecimal.ZERO, new GrossSalary(2100).getBasicExemption());
-        assertEquals(BigDecimal.ZERO, new GrossSalary(2500).getBasicExemption());
+        assertEquals(new BigDecimal("653.27"), new GrossSalary(1201, true, -1, true, true).getBasicExemption().setScale(2, RoundingMode.HALF_UP));
+        assertEquals(BigDecimal.ZERO, new GrossSalary(2100, true, -1, true, true).getBasicExemption());
+        assertEquals(BigDecimal.ZERO, new GrossSalary(2500, true, -1, true, true).getBasicExemption());
     }
 
     @Test
     void roundOff() {
         assertEquals(new BigDecimal("2389.00"), salary.roundOff(new BigDecimal("2389.00453")));
+    }
+
+    @Test
+    void grossSalaryAddedOptions() {
+        //  savingsPension - false - OK
+        assertEquals(new BigDecimal("1139.63"), new GrossSalary(1300, false, -1, true, true).getNetSalary().setScale(2, RoundingMode.HALF_UP));
+        assertEquals(new BigDecimal("1739.40"), new GrossSalary(1300, false, -1, true, true).getPayrollFund().setScale(2, RoundingMode.HALF_UP));
+        assertEquals(new BigDecimal("0.00"), new GrossSalary(1300, false, -1, true, true).getSavingsPension().setScale(2, RoundingMode.HALF_UP));
+        assertEquals(new BigDecimal("139.57"), new GrossSalary(1300, false, -1, true, true).getIncomeTax().setScale(2, RoundingMode.HALF_UP));
+
+        // employee unemployment insurance false - OK
+        assertEquals(new BigDecimal("1135.47"), new GrossSalary(1300, true, -1, false, true).getNetSalary().setScale(2, RoundingMode.HALF_UP));
+        assertEquals(new BigDecimal("1739.40"), new GrossSalary(1300, true, -1, false, true).getPayrollFund().setScale(2, RoundingMode.HALF_UP));
+        assertEquals(new BigDecimal("26.00"), new GrossSalary(1300, true, -1, false, true).getSavingsPension().setScale(2, RoundingMode.HALF_UP));
+        assertEquals(new BigDecimal("138.53"), new GrossSalary(1300, true, -1, false, true).getIncomeTax().setScale(2, RoundingMode.HALF_UP));
+
+        // employer unemployment insurance false - OK
+        assertEquals(new BigDecimal("1118.83"), new GrossSalary(1300, true, -1, true, false).getNetSalary().setScale(2, RoundingMode.HALF_UP));
+        assertEquals(new BigDecimal("1729.00"), new GrossSalary(1300, true, -1, true, false).getPayrollFund().setScale(2, RoundingMode.HALF_UP));
+        assertEquals(new BigDecimal("26.00"), new GrossSalary(1300, true, -1, true, false).getSavingsPension().setScale(2, RoundingMode.HALF_UP));
+        assertEquals(new BigDecimal("134.37"), new GrossSalary(1300, true, -1, true, false).getIncomeTax().setScale(2, RoundingMode.HALF_UP));
     }
 
     @Test
