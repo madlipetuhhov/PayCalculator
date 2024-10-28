@@ -19,18 +19,13 @@ public class NetSalary extends Salary {
     @Override
     protected BigDecimal getGrossSalary(BigDecimal netSalary) {
         BigDecimal incomeTax = BigDecimal.ZERO;
-        if (!savingsPensionOption) getSavingsPension();
+//        if (!savingsPensionOption) getSavingsPension();
         if (netSalary.compareTo(MAX_BASIC_EXEMPTION) > 0) {
             incomeTax = (netSalary.subtract(getBasicExemption(netSalary))).divide(new BigDecimal("4"), 4, RoundingMode.HALF_UP);
-
         }
         BigDecimal taxableIncome = incomeTax.multiply(new BigDecimal("5"));
         BigDecimal amountBeforeIncomeTax = getBasicExemption(netSalary).add(taxableIncome);
         BigDecimal grossSalary = amountBeforeIncomeTax.multiply(new BigDecimal("1.037344"));
-//        if (!savingsPensionOption) {
-//            BigDecimal a = grossSalary.multiply(SAVINGS_PENSION);
-//            grossSalary = grossSalary.subtract(a);
-//        }
         return grossSalary;
     }
 

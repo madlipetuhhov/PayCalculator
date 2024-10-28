@@ -53,6 +53,21 @@ class GrossSalaryTest {
     }
 
     @Test
+    void grossSalaryBasicExemptionOptions() {
+        // BasicExemptiuon on -1 ehk kalkuleeritud basic exemption - OK
+        assertEquals(new BigDecimal("902.00"), new GrossSalary(1000, true, -1, true, true).getNetSalary().setScale(2, RoundingMode.HALF_UP));
+        assertEquals(new BigDecimal("1118.83"), new GrossSalary(1300, true, -1, true, true).getNetSalary().setScale(2, RoundingMode.HALF_UP));
+        assertEquals(new BigDecimal("1850.88"), new GrossSalary(2400, true, -1, true, true).getNetSalary().setScale(2, RoundingMode.HALF_UP));
+
+        // valitud BasicExemption - OK
+        assertEquals(new BigDecimal("261.36"), new GrossSalary(300, true, 150, true, true).getNetSalary().setScale(2, RoundingMode.HALF_UP));
+        assertEquals(new BigDecimal("801.20"), new GrossSalary(1000, true, 150, true, true).getNetSalary().setScale(2, RoundingMode.HALF_UP));
+        assertEquals(new BigDecimal("1032.56"), new GrossSalary(1300, true, 150, true, true).getNetSalary().setScale(2, RoundingMode.HALF_UP));
+        assertEquals(new BigDecimal("1850.88"), new GrossSalary(2400, true, 150, true, true).getNetSalary().setScale(2, RoundingMode.HALF_UP));
+        assertEquals(new BigDecimal("1556.93"), new GrossSalary(2000, true, 700, true, true).getNetSalary().setScale(2, RoundingMode.HALF_UP));
+    }
+
+    @Test
     void toStringMethod() {
         assertEquals("""
                         

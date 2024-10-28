@@ -43,4 +43,20 @@ class PayrollFundTest {
         assertEquals(new BigDecimal("152.42"), new PayrollFund(1800, true, -1, true, false).getIncomeTax().setScale(2, RoundingMode.HALF_UP));
         assertEquals(new BigDecimal("446.62"), new PayrollFund(1800, true, -1, true, false).getSocialTax().setScale(2, RoundingMode.HALF_UP));
     }
+
+
+    @Test
+    void payrollFundBasicExemptionOptions() {
+        // BasicExemptiuon on -1 ehk kalkuleeritud basic exemption - OK
+        assertEquals(new BigDecimal("764.82"), new PayrollFund(1100, true, -1, true, true).getNetSalary().setScale(2, RoundingMode.HALF_UP));
+        assertEquals(new BigDecimal("995.37"), new PayrollFund(1500, true, -1, true, true).getNetSalary().setScale(2, RoundingMode.HALF_UP));
+        assertEquals(new BigDecimal("1427.83"), new PayrollFund(2400, true, -1, true, true).getNetSalary().setScale(2, RoundingMode.HALF_UP));
+
+//        // valitud BasicExemption 150
+        assertEquals(new BigDecimal("318.19"), new PayrollFund(500, true, 150, true, true).getNetSalary().setScale(2, RoundingMode.HALF_UP));
+        assertEquals(new BigDecimal("664.02"), new PayrollFund(1100, true, 150, true, true).getNetSalary().setScale(2, RoundingMode.HALF_UP));
+        assertEquals(new BigDecimal("894.57"), new PayrollFund(1500, true, 150, true, true).getNetSalary().setScale(2, RoundingMode.HALF_UP));
+        assertEquals(new BigDecimal("1470.96"), new PayrollFund(2500, true, 150, true, true).getNetSalary().setScale(2, RoundingMode.HALF_UP));
+        assertEquals(new BigDecimal("1474.61"), new PayrollFund(2500, true, 700, true, true).getNetSalary().setScale(2, RoundingMode.HALF_UP));
+    }
 }
