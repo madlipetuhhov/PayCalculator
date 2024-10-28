@@ -8,7 +8,7 @@ public class Calculator {
         Salary grossSalary = new GrossSalary(1300, true, -1, true, true);
         System.out.println(grossSalary);
 
-//        Salary netSalary = new NetSalary(1156.27, true, -1, true, true);
-//        System.out.println(netSalary);
+        Salary netSalary = new NetSalary(1156.27, true, -1, true, true);
+        System.out.println(netSalary);
     }
 }

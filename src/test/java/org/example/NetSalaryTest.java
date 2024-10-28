@@ -33,8 +33,8 @@ class NetSalaryTest {
         assertEquals(BigDecimal.ZERO, salary.getBasicExemption(new BigDecimal("3084.80")));
     }
 
-    @Test
-    void netSalaryAddedOptions() {
+//    @Test
+//    void netSalaryAddedOptions() {
         //  savingsPension - false
 //        assertEquals(new BigDecimal("1549.86"), new NetSalary(1300, false, -1, true, true).getGrossSalary(new BigDecimal("1300")).setScale(2, RoundingMode.HALF_UP));
 //        assertEquals(new BigDecimal("2073.71"), new NetSalary(1300, false, -1, true, true).getPayrollFund().setScale(2, RoundingMode.HALF_UP));
@@ -53,5 +53,21 @@ class NetSalaryTest {
 //        assertEquals(new BigDecimal("2114.01"), new NetSalary(1300, true, -1, true, false).getPayrollFund().setScale(2, RoundingMode.HALF_UP));
 //        assertEquals(new BigDecimal("31.79"), new NetSalary(1300, true, -1, true, false).getSavingsPension().setScale(2, RoundingMode.HALF_UP));
 //        assertEquals(new BigDecimal("232.26"), new NetSalary(1300, true, -1, true, false).getIncomeTax().setScale(2, RoundingMode.HALF_UP));
-    }
+//    }
+
+//
+//    @Test
+//    void netSalaryBasicExemptionOptions() {
+//        // BasicExemptiuon on -1 ehk kalkuleeritud basic exemption - OK
+////        assertEquals(new BigDecimal("997.41"), new NetSalary(900, true, -1, true, true).getGrossSalary(new BigDecimal("900")).setScale(2, RoundingMode.HALF_UP));
+////        assertEquals(new BigDecimal("1429.70"), new NetSalary(1200, true, -1, true, true).getGrossSalary(new BigDecimal("1200")).setScale(2, RoundingMode.HALF_UP));
+////        assertEquals(new BigDecimal("3112.03"), new NetSalary(2400, true, -1, true, true).getGrossSalary(new BigDecimal("2400")).setScale(2, RoundingMode.HALF_UP));
+//
+//////        // valitud BasicExemption 150
+////        assertEquals(new BigDecimal("609.44"), new NetSalary(500, true, 150, true, true).getGrossSalary(new BigDecimal("500")).setScale(2, RoundingMode.HALF_UP));
+////        assertEquals(new BigDecimal("1257.78"), new NetSalary(1000, true, 150, true, true).getGrossSalary(new BigDecimal("1000")).setScale(2, RoundingMode.HALF_UP));
+////        assertEquals(new BigDecimal("1517.12"), new NetSalary(1200, true, 150, true, true).getGrossSalary(new BigDecimal("1200")).setScale(2, RoundingMode.HALF_UP));
+////        assertEquals(new BigDecimal("3112.03"), new NetSalary(2400, true, 150, true, true).getGrossSalary(new BigDecimal("2400")).setScale(2, RoundingMode.HALF_UP));
+////        assertEquals(new BigDecimal("3112.03"), new NetSalary(2400, true, 700, true, true).getGrossSalary(new BigDecimal("2400")).setScale(2, RoundingMode.HALF_UP));
+//    }
 }
